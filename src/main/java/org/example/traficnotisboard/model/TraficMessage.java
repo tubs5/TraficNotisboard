@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 /**
  * @author Tobias Heidlund
  */
@@ -21,4 +19,11 @@ public class TraficMessage {
     @ManyToOne
     private Channel channel;
     private String title;
+
+    public boolean hasId() {
+        if (id != null){
+            return id != 0;
+        }
+        return false;
+    }
 }

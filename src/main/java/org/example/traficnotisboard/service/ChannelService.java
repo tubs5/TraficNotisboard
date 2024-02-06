@@ -16,11 +16,20 @@ public class ChannelService {
     ChannelRepository channelRepository;
 
 
-    public Long create() {
-        return channelRepository.save(new Channel()).getId();
+    public Channel create(String title) {
+        return channelRepository.save(new Channel(title));
     }
 
     public List<Channel> getAll() {
         return channelRepository.findAll();
+    }
+
+    public Channel update(Channel channel) {
+       return channelRepository.save(channel);
+
+    }
+
+    public void remove(long id) {
+        channelRepository.deleteById(id);
     }
 }

@@ -20,4 +20,20 @@ public class Channel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String title;
+
+    public Channel(Long id ){
+        this.id = id;
+    }
+    public Channel(String title ){
+        this.title = title;
+    }
+
+
+    public boolean hasTitle() {
+        if(title != null){
+            return !title.isEmpty();
+        }
+        return false;
+    }
 }

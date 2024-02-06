@@ -13,7 +13,7 @@ import java.util.List;
  * @author Tobias Heidlund
  */
 @RestController
-@RequestMapping("/channels/{channelId}")
+@RequestMapping("/channels/{channelId}/messages")
 public class TrafficController {
     @Autowired
     TraficService traficService;
@@ -31,7 +31,9 @@ public class TrafficController {
     //TODO: MAKE SURE THAT ONLY REQUIED FILEDS ARE SENT
     @DeleteMapping()
     public ResponseEntity<String> deleteMessage(@PathVariable Long channelId, @RequestBody TraficMessage message){
-        if (traficService.delete(channelId,message)){
+        if(!message.hasId()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Message has no ID");
+        } else if (traficService.delete(channelId,message)){
             return ResponseEntity.status(200).body("Success");
         }else {
             return ResponseEntity.status(400).body("Failed");

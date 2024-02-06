@@ -22,12 +22,12 @@ public class TraficService {
     public boolean delete(Long channel, TraficMessage message){
         message.setChannel(new Channel(channel));
         traficRepository.delete(message);
-        return get(channel,message.getId()) == null;
+        return get(channel,message.getId()) == message;
     }
 
     public boolean save(Long channel, TraficMessage message){
         message.setChannel(new Channel(channel));
-        return (traficRepository.save(message).equals(message));
+        return (traficRepository.save(message).getTitle().equals(message.getTitle()));
     }
     public TraficMessage get(Long channel,Long id){
         return traficRepository.getByChannelAndId(new Channel(channel),id);
